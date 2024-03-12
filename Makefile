@@ -1,8 +1,11 @@
-all: main.c ts_hashmap.o
-	gcc -Wall -g -o hashtest main.c ts_hashmap.o -lpthread
+all: main.c mmm.o rtclock.o
+	gcc -O3 -Wall -g -o mmm main.c mmm.o rtclock.o -lpthread -lm
 
-ts_hashmap.o: ts_hashmap.h ts_hashmap.c
-	gcc -Wall -g -c ts_hashmap.c
+mmm.o: mmm.h mmm.c
+	gcc -Wall -g -c mmm.c
+
+rtclock.o: rtclock.h rtclock.c
+	gcc -Wall -g -c rtclock.c
 
 clean:
-	rm -f hashtest *.o
+	rm -f mmm *.o

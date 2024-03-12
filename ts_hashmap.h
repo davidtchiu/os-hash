@@ -9,9 +9,11 @@ typedef struct ts_entry_t {
 } ts_entry_t;
 
 // A hashmap contains an array of pointers to entries,
-// the capacity of the array, and the size (number of entries stored)
+// the capacity of the array, the size (number of entries stored), 
+// and the number of operations that it has run.
 typedef struct ts_hashmap_t {
    ts_entry_t **table;
+   int numOps;
    int capacity;
    int size;
 } ts_hashmap_t;
@@ -21,5 +23,4 @@ ts_hashmap_t *initmap(int capacity);
 int get(ts_hashmap_t *map, int key);
 int put(ts_hashmap_t *map, int key, int value);
 int del(ts_hashmap_t *map, int key);
-double lf(ts_hashmap_t *map);
 void printmap(ts_hashmap_t *map);
