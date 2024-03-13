@@ -52,14 +52,7 @@ int del(ts_hashmap_t *map, int key) {
 
 
 /**
- * @return the load factor of the given map
- */
-double lf(ts_hashmap_t *map) {
-  return (double) map->size / map->capacity;
-}
-
-/**
- * Prints the contents of the map
+ * Prints the contents of the map (given)
  */
 void printmap(ts_hashmap_t *map) {
   for (int i = 0; i < map->capacity; i++) {
@@ -73,4 +66,14 @@ void printmap(ts_hashmap_t *map) {
     }
     printf("\n");
   }
+}
+
+/**
+ * Free up the space allocated for hashmap
+ * @param map a pointer to the map
+ */
+void freeMap(ts_hashmap_t *map) {
+  // TODO: iterate through each list, free up all nodes
+  // TODO: free the hash table
+  // TODO: destroy locks
 }
