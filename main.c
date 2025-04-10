@@ -5,11 +5,10 @@
 #include "rtclock.h"
 #include "ts_hashmap.h"
 
-#define NUM_OPS_PER_THREAD 10000
-
 // globals
 ts_hashmap_t *map = NULL;
 int maxKey = 0;
+int ops_per_thread = 10000;
 
 /**
  * Work for each thread. Has a 50% chance to put, 25% chance to del, or get
@@ -19,7 +18,7 @@ int maxKey = 0;
 void* threadwork(void* args) {
 	int r = 0;
 	int key = 0;
-	for (int i = 0; i < NUM_OPS_PER_THREAD; i++) {
+	for (int i = 0; i < ops_per_thread; i++) {
 		r = rand() % 10;
 		key = rand() % (1+maxKey);
 		if (r < 5) put(map, key, key);
@@ -34,16 +33,17 @@ void* threadwork(void* args) {
  * (DO NOT MODIFY WHEN SUBMITTING FINAL VERSION)
  */
 int main(int argc, char *argv[]) {
-	if (argc < 4) {
-		printf("Usage: %s <num threads> <hashmap capacity> <max key>\n", argv[0]);
+	if (argc < 5) {
+		printf("Usage: %s <num-threads> <ops-per-thread> <hashmap-capacity> <max-key>\n", argv[0]);
 		return 1;
 	}
 
 	double endTime = 0, startTime = 0;
 	srand(time(NULL));
 	int num_threads = (unsigned int) atoi(argv[1]);
-	int capacity = (unsigned int) atoi(argv[2]);
-	maxKey = (unsigned int) atoi(argv[3]);
+	ops_per_thread = (unsigned int) atoi(argv[2]);
+	int capacity = (unsigned int) atoi(argv[3]);
+	maxKey = (unsigned int) atoi(argv[4]);
 
 	// initialize map
 	map = initmap(capacity);
