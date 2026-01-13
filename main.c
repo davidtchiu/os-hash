@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 	startTime = rtclock();
 
 	// spawn threads
-	pthread_t *threads = (pthread_t*) malloc(sizeof(pthread_t) * num_threads);
+	pthread_t *threads = malloc(sizeof(pthread_t) * num_threads);
 	for (int i = 0; i < num_threads; i++) {
 		pthread_create(&threads[i], NULL, threadwork, NULL);
 	}
